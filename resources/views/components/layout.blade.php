@@ -44,22 +44,23 @@
                     </button>
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                    <div class="flex flex-shrink-0 items-center">
-                        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company">
-                    </div>
-                    <div class="hidden sm:ml-6 sm:block">
+                    <div class="hidden sm:block">
                         <div class="flex space-x-4">
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <x-nav-link href="/"
-                                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
-                                aria-current="page">
+                            {{-- <x-nav-link href="/"
+                                class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium text-white">
                                 Home </x-nav-link>
                             <x-nav-link href="/about"
-                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                                class="{{ request()->is('about') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium text-white">
                                 About </x-nav-link>
                             <x-nav-link href="/contact"
-                                class="ounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                                class="{{ request()->is('contact') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium text-white">
+                                Contact </x-nav-link> --}}
+
+                            <x-nav-link href="/" :active="request()->is('/')">
+                                Home </x-nav-link>
+                            <x-nav-link href="/about" :active="request()->is('about')">
+                                About </x-nav-link>
+                            <x-nav-link href="/contact" :active="request()->is('contact')">
                                 Contact </x-nav-link>
                         </div>
                     </div>
@@ -96,18 +97,27 @@
 
         <!-- Mobile menu, show/hide based on menu state. -->
         <div class="sm:hidden" id="mobile-menu">
-            <div class="space-y-1 px-2 pb-3 pt-2">
+            {{-- <div class="space-y-1 px-2 pb-3 pt-2">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <x-nav-link href="/"
-                    class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">
+                    class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} block rounded-md px-3 py-2 text-base font-medium">
                     Home </x-nav-link>
                 <x-nav-link href="/about"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    class="{{ request()->is('about') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} block rounded-md px-3 py-2 text-base font-medium">
                     About </x-nav-link>
                 <x-nav-link href="/contact"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    class="{{ request()->is('contact') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} block rounded-md px-3 py-2 text-base font-medium">
                     Contact </x-nav-link>
+            </div> --}}
 
+            <div class="space-y-1 px-2 pb-3 pt-2">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <x-nav-link href="/" :active="request()->is('/')">
+                    Home </x-nav-link>
+                <x-nav-link href="/about" :active="request()->is('about')">
+                    About </x-nav-link>
+                <x-nav-link href="/contact" :active="request()->is('contact')">
+                    Contact </x-nav-link>
             </div>
     </nav>
 
