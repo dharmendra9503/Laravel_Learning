@@ -57,3 +57,57 @@
 
 {{ $slot }}: Echoing variable 
 </pre>
+
+</br>
+
+# Laravel Migration Guide
+
+This guide provides instructions on how to create and run migration files using Laravel's Artisan command-line tool.
+
+## Prerequisites
+
+Ensure you have the following installed:
+- PHP
+- Composer
+- Laravel
+
+## Artisan Commands Overview
+
+To view all Artisan commands related to Laravel, use the following command in your terminal:
+
+```
+php artisan list
+```
+
+### Creating a Migration File
+
+To create a new migration file, use the make:migration Artisan command. This command will generate a new migration file in the database/migrations directory.
+
+```
+php artisan make:migration <migration_file_name>
+```
+
+<div style="background-color: white; color: black; padding: 10px; border-left: 6px solid #ccc; transition: all 0.3s ease;">
+<strong>Note:</strong> Path to see the created file: /project_path/database/migrations
+</div>
+
+### Running Migrations
+After creating the migration file, you can run the migration to update your database schema. Use the migrate Artisan command to apply all pending migrations.
+
+```
+php artisan migrate
+```
+
+### Additional Information
+If you need to roll back the last migration operation, you can use the following command:
+
+```
+php artisan migrate:rollback
+```
+To refresh the entire database and run all migrations from scratch, use:
+
+```
+php artisan migrate:refresh
+```
+
+For more advanced migration options, refer to the [Laravel Migration Documentation](https://laravel.com/docs/11.x/migrations).
