@@ -197,3 +197,27 @@ User::where('active', 0)->delete();
 ```
 
 ### For more detailed information about Eloquent, refer to the official [Laravel Eloquent documentation.](https://laravel.com/docs/11.x/eloquent)
+
+</br>
+
+# Model Factories
+
+Model Factories allow us to create models with fake data, making it easier to test and seed your database. Laravel provides a fluent API for defining factories and comes with built-in support for Faker, a library for generating fake data.
+
+## Creating a model factory
+
+To create a new factory in Laravel, you can use the make:factory Artisan command:
+
+```bash
+# This is the most common command, where you specify the factory name and associate it with a model.
+php artisan make:factory UserFactory --model=User
+
+# Creating a Factory Without a Model
+php artisan make:factory UserFactory
+
+# Creating model with factory
+php artisan make:model User -f
+
+# If you want to overwrite an existing factory class, you can use the --force option:
+php artisan make:factory UserFactory --model=User --force
+```

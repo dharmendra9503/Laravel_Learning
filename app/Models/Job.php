@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Support\Arr;
 
 class Job extends Model
 {
+    use HasFactory;
     //This will point to table in database, If you don't want to define this then need to create class with table name.
     protected $table = "job_listing";
 
