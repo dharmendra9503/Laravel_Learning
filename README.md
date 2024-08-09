@@ -111,3 +111,89 @@ php artisan migrate:refresh
 ```
 
 For more advanced migration options, refer to the [Laravel Migration Documentation](https://laravel.com/docs/11.x/migrations).
+
+</br>
+
+# Eloquent
+
+Eloquent is Laravel's built-in Object-Relational Mapper (ORM) that provides an expressive and easy-to-use syntax for interacting with your database. It simplifies database operations by allowing you to work with your database using models rather than writing raw SQL queries.
+
+### Models:
+
+Models in Eloquent represent tables in your database. Each model corresponds to a table and interacts with it. 
+
+For example, if you have a users table, you would create a User model to interact with this table.
+```
+php artisan make:model User
+```
+<pre><strong style="color: orange">NOTE:</strong> This command generates a User model in the <strong>app/Models</strong> directory. </pre>
+
+### Retrieving Data:
+
+Eloquent provides several methods to retrieve data from your database. The most common ones include `all()`, `find()`, `where()`, and `get()`.
+
+```php
+// Retrieve all users
+$users = User::all();
+
+// Retrieve a user by primary key
+$user = User::find(1);
+
+// Retrieve users with a specific condition
+$activeUsers = User::where('active', 1)->get();
+```
+
+### Inserting Data:
+
+You can insert data into your database using Eloquent's `save()` method or the `create()` method.
+
+```php
+// Using save() method
+$user = new User;
+$user->name = 'John Doe';
+$user->email = 'johndoe@example.com';
+$user->save();
+
+// Using create() method
+User::create([
+    'name' => 'Jane Doe',
+    'email' => 'janedoe@example.com',
+]);
+```
+
+<pre><strong style="color: orange">NOTE:</strong> To use the create() method, make sure the fields are listed in the $fillable property of the model to allow mass assignment.
+<code>
+class User extends Model
+{
+    protected $fillable = ['name', 'email'];
+}
+</code>
+</pre>
+
+### Updating Data:
+
+Updating data is as simple as retrieving the model, modifying the attributes, and then saving it.
+
+```php
+// Updating a user
+$user = User::find(1);
+$user->email = 'newemail@example.com';
+$user->save();
+
+// Using update() method
+User::where('id', 1)->update(['email' => 'newemail@example.com']);
+```
+### Deleting Data:
+
+Eloquent allows you to delete records using the `delete()` method. You can either delete a specific record or multiple records based on a condition.
+
+```php
+// Deleting a single user
+$user = User::find(1);
+$user->delete();
+
+// Deleting multiple users
+User::where('active', 0)->delete();
+```
+
+### For more detailed information about Eloquent, refer to the official [Laravel Eloquent documentation.](https://laravel.com/docs/11.x/eloquent)

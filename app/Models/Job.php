@@ -2,38 +2,46 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Support\Arr;
 
-class Job
+class Job extends Model
 {
-    public static function all(): array
-    {
-        return [
-            [
-                "id" => 1,
-                "title" => "Director",
-                "salary" => "$50,0000"
-            ],
-            [
-                "id" => 2,
-                "title" => "Programmer",
-                "salary" => "$10,000"
-            ],
-            [
-                "id" => 3,
-                "title" => "Teacher",
-                "salary" => "$40,000"
-            ]
-        ];
-    }
+    //This will point to table in database, If you don't want to define this then need to create class with table name.
+    protected $table = "job_listing";
 
-    public static function find(int $id): array
-    {
-        $job = Arr::first(static::all(), fn ($job) => $job['id'] == $id);
+    //If this is not defined and someone want to create or update mass data then gives exception : "Illuminate\Database\Eloquent\MassAssignmentException"
+    protected $fillable = ["title", "salary"];
 
-        if (!$job) {
-            abort(404);
-        }
-        return $job;
-    }
+    //Now I am extending Model Eloquent which is ORM. So not need to define method.
+    // public static function all(): array
+    // {
+    //     return [
+    //         [
+    //             "id" => 1,
+    //             "title" => "Director",
+    //             "salary" => "$50,0000"
+    //         ],
+    //         [
+    //             "id" => 2,
+    //             "title" => "Programmer",
+    //             "salary" => "$10,000"
+    //         ],
+    //         [
+    //             "id" => 3,
+    //             "title" => "Teacher",
+    //             "salary" => "$40,000"
+    //         ]
+    //     ];
+    // }
+
+    // public static function find(int $id): array
+    // {
+    //     $job = Arr::first(static::all(), fn ($job) => $job['id'] == $id);
+
+    //     if (!$job) {
+    //         abort(404);
+    //     }
+    //     return $job;
+    // }
 }
