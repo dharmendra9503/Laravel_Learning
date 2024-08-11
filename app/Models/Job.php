@@ -15,6 +15,11 @@ class Job extends Model
     //If this is not defined and someone want to create or update mass data then gives exception : "Illuminate\Database\Eloquent\MassAssignmentException"
     protected $fillable = ["title", "salary"];
 
+    public function employer()
+    {
+        return $this->belongsTo(Employer::class);
+    }
+
     //Now I am extending Model Eloquent which is ORM. So not need to define method.
     // public static function all(): array
     // {
