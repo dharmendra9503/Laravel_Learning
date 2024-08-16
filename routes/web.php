@@ -56,12 +56,13 @@ Route::get('/contact', function () {
 });
 
 Route::get('/jobs', function () {
+    $jobs = Job::with('employer')->get();
     return view('jobs', [
-        "jobs" => Job::all()
+        "jobs" => $jobs
     ]);
 });
 
-ROute::get('/jobs/{id}', function ($id) {
+Route::get('/jobs/{id}', function ($id) {
     /*
      * In above method we don't have access of external variable so to use that external variable we need to use "use" keyword
      */
