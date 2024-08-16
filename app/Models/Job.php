@@ -20,6 +20,10 @@ class Job extends Model
         return $this->belongsTo(Employer::class);
     }
 
+    public function tags() {
+        return $this->belongsToMany(Tag::class, foreignPivotKey: "job_listing_id");
+    }
+
     //Now I am extending Model Eloquent which is ORM. So not need to define method.
     // public static function all(): array
     // {
