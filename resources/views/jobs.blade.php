@@ -13,5 +13,11 @@
                 </div>
             </a>
         @endforeach
+
+        <div>
+            {{-- This will use default pagination provided by laravel. (This file availables to vendors) --}}
+            {{-- To edit default pagination need that files to our views (To do this run this command " php artisan vendor:publish ") --}}
+            {{ $jobs->links() }}
+        </div>
     </div>
 </x-layout>
