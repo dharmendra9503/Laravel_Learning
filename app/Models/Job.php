@@ -13,7 +13,9 @@ class Job extends Model
     protected $table = "job_listing";
 
     //If this is not defined and someone want to create or update mass data then gives exception : "Illuminate\Database\Eloquent\MassAssignmentException"
-    protected $fillable = ["title", "salary"];
+    // protected $fillable = ["employer_id", "title", "salary"];
+
+    protected $guarded = [];           //Using this field we can remove mass assign validation.
 
     public function employer()
     {
