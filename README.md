@@ -221,3 +221,106 @@ php artisan make:model User -f
 # If you want to overwrite an existing factory class, you can use the --force option:
 php artisan make:factory UserFactory --model=User --force
 ```
+</br>
+
+# Database Seeding
+
+Database seeding is a crucial part of the development process in Laravel, allowing you to populate your database with initial or test data. This can be particularly useful when setting up a new project, creating test environments, or running automated tests.
+
+Laravel provides a simple and flexible seeding system that allows you to define seed classes, which can then be executed to insert data into your database tables.
+
+## Creating a Seeder Class
+To create a new seeder class, use the Artisan command:
+
+```bash
+php artisan make:seeder <SeederName>
+
+Example:
+php artisan make:seeder UsersTableSeeder
+```
+
+This command generates a seeder file in the <strong>database/seeders</strong> directory.
+
+## Defining Seed Data
+Once you have your seeder class, you can define the data that will be inserted into the database. Open the created seeder class, and within the run method, define your data:
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+class UsersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => Str::random(10).'@example.com',
+            'password' => bcrypt('password'),
+        ]);
+    }
+}
+```
+
+## Running Seeders
+To run your seeder, use the following Artisan command:
+
+```bash
+php artisan db:seed --class=<SeederName>
+
+Example:
+php artisan db:seed --class=UsersTableSeeder
+```
+
+## Running All Seeders
+If you have multiple seeders and want to run them all at once, Laravel provides a way to register all your seeders in the DatabaseSeeder class.
+
+### Registering Seeders
+In the database/seeders/DatabaseSeeder.php file, call the seeders you want to execute:
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->call([
+            UsersTableSeeder::class,
+            // Other seeders can be added here
+        ]);
+    }
+}
+```
+
+To run all registered seeders, use the following command:
+```bash
+php artisan db:seed
+```
+
+### Refreshing the Database with Seeders
+If you need to reset your database and seed it from scratch, Laravel provides a convenient way to do this:
+
+```bash
+php artisan migrate:refresh --seed
+```
+
+This command will rollback all migrations, re-run them, and then execute the seeders.
