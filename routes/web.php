@@ -81,6 +81,48 @@ Route::get('/jobs/{id}', function ($id) {
     return view('jobs.show', ['job' => $job]);
 });
 
+Route::get('/jobs/{id}/edit', function ($id) {
+    $job = Job::find($id);
+
+    return view('jobs.edit', ['job' => $job]);
+});
+
+Route::patch('/jobs/{id}', function ($id) {
+    // Validate
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        'salary' => ['required'],
+    ]);
+
+    // Authorize (On hold...)
+
+    // Update the job
+    $job = Job::findOrFail($id);
+    $job->title = request('title');
+    $job->salary = request('salary');
+    $job->save();
+
+    //Also can use this.
+    // $job->update([
+    //     'title'=> request('title'),
+    //     'salary'=> request('salary'),
+    // ]);
+
+    // Redirect to the job page
+    return redirect('/jobs/' . $job->id);
+});
+
+Route::delete('/jobs/{id}', function ($id) {
+    // Authorize (On hold...)
+
+    // Delete job
+    $job = Job::findOrFail($id);
+    $job->delete();
+
+    // Redirect
+    return redirect('/jobs');
+});
+
 Route::post('/jobs', function () {
     request()->validate([
         'title' => ['required', 'min:3'],
