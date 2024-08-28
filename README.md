@@ -324,3 +324,15 @@ php artisan migrate:refresh --seed
 ```
 
 This command will rollback all migrations, re-run them, and then execute the seeders.
+
+
+</br>
+
+# Routes Tips
+
+- Route controller
+- Route groups
+- Route view
+- Route resources
+
+> Watch this video to get tips for routes : [Video](https://laracasts.com/series/30-days-to-learn-laravel-11/episodes/19)

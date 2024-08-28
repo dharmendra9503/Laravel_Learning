@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Job;
 
 // $jobs = [
 //     [
@@ -43,99 +43,148 @@ use App\Models\Job;
 //     }
 // }
 
-Route::get('/', function () {
-    return view('home');
+// Route::get('/', function () {
+//     return view('home');
+// });
+Route::view('', 'home');
+
+// Route::get('/about', function () {
+//     return view('about');
+// });
+Route::view('/about', 'about');
+
+// Route::get('/contact', function () {
+//     return view('contact');
+// });
+Route::view('/contact', 'contact');
+
+//Index
+// Route::get('/jobs', function () {
+//     // $jobs = Job::with('employer')->paginate(4);
+//     // $jobs = Job::with('employer')->simplePaginate(4);
+//     $jobs = Job::with('employer')->latest()->cursorPaginate(4);
+//     return view('jobs.index', [
+//         "jobs" => $jobs
+//     ]);
+// });
+
+// Route::get('/jobs', [JobController::class, 'index']);
+
+//Create
+// Route::get('/jobs/create', function () {
+//     return view("jobs.create");
+// });
+
+// Route::get('/jobs/create', [JobController::class, 'create']);
+
+//Show
+// Route::get('/jobs/{job}', function (Job $job) {
+//     /*
+//      * In above method we don't have access of external variable so to use that external variable we need to use "use" keyword
+//      */
+//     // $job = Arr::first(Job::all(), function ($job) use ($id) {
+//     //     return $job['id'] == $id;
+//     // });
+
+//     // $job = Job::find($id);
+
+//     return view('jobs.show', ['job' => $job]);
+// });
+
+// Route::get('/jobs/{job}', [JobController::class, 'show']);
+
+//Edit
+// Route::get('/jobs/{job}/edit', function (Job $job) {
+//     // $job = Job::find($id);
+
+//     return view('jobs.edit', ['job' => $job]);
+// });
+
+// Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
+
+//Update
+// Route::patch('/jobs/{job}', function (Job $job) {
+//     // Validate
+//     request()->validate([
+//         'title' => ['required', 'min:3'],
+//         'salary' => ['required'],
+//     ]);
+
+//     // Authorize (On hold...)
+
+//     // Update the job
+//     // $job = Job::findOrFail($id);
+//     $job->title = request('title');
+//     $job->salary = request('salary');
+//     $job->save();
+
+//     //Also can use this.
+//     // $job->update([
+//     //     'title'=> request('title'),
+//     //     'salary'=> request('salary'),
+//     // ]);
+
+//     // Redirect to the job page
+//     return redirect('/jobs/' . $job->id);
+// });
+
+// Route::patch('/jobs/{job}', [JobController::class, 'update']);
+
+//Destroy
+// Route::delete('/jobs/{job}', function (Job $job) {
+//     // Authorize (On hold...)
+
+//     // Delete job
+//     // $job = Job::findOrFail($id);
+//     $job->delete();
+
+//     // Redirect
+//     return redirect('/jobs');
+// });
+
+// Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
+
+//Store
+// Route::post('/jobs', function () {
+//     request()->validate([
+//         'title' => ['required', 'min:3'],
+//         'salary' => ['required'],
+//     ]);
+
+//     request()->all();    //To get all request data.
+
+//     Job::create([
+//         "title" => request("title"),
+//         "salary" => request("salary"),
+//         "employer_id" => 1
+//     ]);
+
+//     return redirect("/jobs");
+// });
+
+// Route::post('/jobs', [JobController::class, 'store']);
+
+
+
+/**
+ * Route Group
+ */
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs', 'index');
+    Route::get('/jobs/create', 'create');
+    Route::get('/jobs/{job}', 'show');
+    Route::get('/jobs/{job}/edit', 'edit');
+    Route::patch('/jobs/{job}', 'update');
+    Route::delete('/jobs/{job}', 'destroy');
+    Route::post('/jobs', 'store');
 });
 
-Route::get('/about', function () {
-    return view('about');
-});
 
-Route::get('/contact', function () {
-    return view('contact');
-});
-
-Route::get('/jobs', function () {
-    // $jobs = Job::with('employer')->paginate(4);
-    // $jobs = Job::with('employer')->simplePaginate(4);
-    $jobs = Job::with('employer')->latest()->cursorPaginate(4);
-    return view('jobs.index', [
-        "jobs" => $jobs
-    ]);
-});
-
-Route::get('/jobs/create', function () {
-    return view("jobs.create");
-});
-
-Route::get('/jobs/{id}', function ($id) {
-    /*
-     * In above method we don't have access of external variable so to use that external variable we need to use "use" keyword
-     */
-    // $job = Arr::first(Job::all(), function ($job) use ($id) {
-    //     return $job['id'] == $id;
-    // });
-
-    $job = Job::find($id);
-
-    return view('jobs.show', ['job' => $job]);
-});
-
-Route::get('/jobs/{id}/edit', function ($id) {
-    $job = Job::find($id);
-
-    return view('jobs.edit', ['job' => $job]);
-});
-
-Route::patch('/jobs/{id}', function ($id) {
-    // Validate
-    request()->validate([
-        'title' => ['required', 'min:3'],
-        'salary' => ['required'],
-    ]);
-
-    // Authorize (On hold...)
-
-    // Update the job
-    $job = Job::findOrFail($id);
-    $job->title = request('title');
-    $job->salary = request('salary');
-    $job->save();
-
-    //Also can use this.
-    // $job->update([
-    //     'title'=> request('title'),
-    //     'salary'=> request('salary'),
-    // ]);
-
-    // Redirect to the job page
-    return redirect('/jobs/' . $job->id);
-});
-
-Route::delete('/jobs/{id}', function ($id) {
-    // Authorize (On hold...)
-
-    // Delete job
-    $job = Job::findOrFail($id);
-    $job->delete();
-
-    // Redirect
-    return redirect('/jobs');
-});
-
-Route::post('/jobs', function () {
-    request()->validate([
-        'title' => ['required', 'min:3'],
-        'salary' => ['required'],
-    ]);
-
-    request()->all();    //To get all request data.
-
-    Job::create([
-        "title" => request("title"),
-        "salary" => request("salary"),
-        "employer_id" => 1
-    ]);
-
-    return redirect("/jobs");
-});
+/**
+ * Route Resources
+ * 
+ * This line of code registers a resource route for the 'jobs' endpoint.
+ * It maps various HTTP requests (GET, POST, PUT, DELETE) to the corresponding methods
+ * in the JobController class, enabling RESTful CRUD operations for the 'jobs' resource.
+ */
+// Route::resource('jobs', JobController::class);
