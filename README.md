@@ -336,3 +336,13 @@ This command will rollback all migrations, re-run them, and then execute the see
 - Route resources
 
 > Watch this video to get tips for routes : [Video](https://laracasts.com/series/30-days-to-learn-laravel-11/episodes/19)
+
+
+</br>
+
+# Authorization Tips
+
+- Gate
+- Policy
+
+> Watch this video to get tips for routes : [Video](https://laracasts.com/series/30-days-to-learn-laravel-11/episodes/23)

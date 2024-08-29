@@ -70,14 +70,14 @@ Route::view('/contact', 'contact');
 //     ]);
 // });
 
-// Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/jobs', [JobController::class, 'index']);
 
 //Create
 // Route::get('/jobs/create', function () {
 //     return view("jobs.create");
 // });
 
-// Route::get('/jobs/create', [JobController::class, 'create']);
+Route::get('/jobs/create', [JobController::class, 'create']);
 
 //Show
 // Route::get('/jobs/{job}', function (Job $job) {
@@ -93,7 +93,7 @@ Route::view('/contact', 'contact');
 //     return view('jobs.show', ['job' => $job]);
 // });
 
-// Route::get('/jobs/{job}', [JobController::class, 'show']);
+Route::get('/jobs/{job}', [JobController::class, 'show']);
 
 //Edit
 // Route::get('/jobs/{job}/edit', function (Job $job) {
@@ -102,7 +102,7 @@ Route::view('/contact', 'contact');
 //     return view('jobs.edit', ['job' => $job]);
 // });
 
-// Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->middleware('auth')->can('edit-job', 'job');
 
 //Update
 // Route::patch('/jobs/{job}', function (Job $job) {
@@ -130,7 +130,7 @@ Route::view('/contact', 'contact');
 //     return redirect('/jobs/' . $job->id);
 // });
 
-// Route::patch('/jobs/{job}', [JobController::class, 'update']);
+Route::patch('/jobs/{job}', [JobController::class, 'update']);
 
 //Destroy
 // Route::delete('/jobs/{job}', function (Job $job) {
@@ -144,7 +144,7 @@ Route::view('/contact', 'contact');
 //     return redirect('/jobs');
 // });
 
-// Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
+Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
 
 //Store
 // Route::post('/jobs', function () {
@@ -164,22 +164,22 @@ Route::view('/contact', 'contact');
 //     return redirect("/jobs");
 // });
 
-// Route::post('/jobs', [JobController::class, 'store']);
+Route::post('/jobs', [JobController::class, 'store'])->middleware('auth');
 
 
 
 /**
  * Route Group
  */
-Route::controller(JobController::class)->group(function () {
-    Route::get('/jobs', 'index');
-    Route::get('/jobs/create', 'create');
-    Route::get('/jobs/{job}', 'show');
-    Route::get('/jobs/{job}/edit', 'edit');
-    Route::patch('/jobs/{job}', 'update');
-    Route::delete('/jobs/{job}', 'destroy');
-    Route::post('/jobs', 'store');
-});
+// Route::controller(JobController::class)->group(function () {
+//     Route::get('/jobs', 'index');
+//     Route::get('/jobs/create', 'create');
+//     Route::get('/jobs/{job}', 'show');
+//     Route::get('/jobs/{job}/edit', 'edit');
+//     Route::patch('/jobs/{job}', 'update');
+//     Route::delete('/jobs/{job}', 'destroy');
+//     Route::post('/jobs', 'store');
+// });
 
 
 /**
