@@ -166,8 +166,6 @@ Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
 
 Route::post('/jobs', [JobController::class, 'store'])->middleware('auth');
 
-
-
 /**
  * Route Group
  */
